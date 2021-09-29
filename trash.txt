@@ -1,0 +1,24 @@
+
+
+import re
+k=re.findall(r'(<td>)([\w\s\d."\']*):([\w\s\d."\']*):([\w\s\d."\']*)(</td>)', p)
+abc=[]
+for each in k:
+    ss=""
+    ds=""
+    a,b,c,d,e = each
+    ss+=a
+    ds+=a
+    ss+=b
+    ds+=b
+    ss+=":"
+    ss+=c
+    ss+=":"
+    ss+=d
+    ds=ds.replace(a, "<td " + c + "  title='"+d+"'>")
+    ss+=e
+    ds+=e
+    abc.append([ss,ds])
+
+for each in abc:
+    p=p.replace(each[0], each[1])
