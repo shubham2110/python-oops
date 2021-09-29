@@ -1,7 +1,7 @@
 
 
 import re
-k=re.findall(r'(<td>)([\w\s\d."\']*):([\w\s\d."\']*):([\w\s\d."\']*)(</td>)', p)
+k=re.findall(r'(<td>)([-_\w\s\d."\']*):([-_\w\s\d."\']*):([-_\w\s\d."\']*)(</td>)', p)
 abc=[]
 for each in k:
     ss=""
