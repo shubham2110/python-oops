@@ -1,30 +1,38 @@
 {
  "name": "MSE",
+ "id":-1,
+ "type":"business",
  "children": [  
 	{
 			"name": "MA1 – Digitized E2E should cost",
 			"status":"red",
 			"id":0,
+			"type":"businesslevel1",
 			"children": [
 			{ 
 				"name": "mstrdata_rdl.e2esc_itm_cost_driver_vw",
 				"id":1,
+				"type":"Technicallevel1",
 				"children": [
 					{ 
 						"name": "mstrdata_cdl.cost_driver",
+						"type":"Technicallevel2",
 						"id":2 ,
 						"children":[
 							{
 								"name":"driver_category",
+								"type":"Technicallevel3",
 								"id":37	,
 								"children":[
 									{
 										"name":"Streamsets",
+										"type":"Platformlevel1",
 										"id":14,
 								
 										"children":[
 											{
 												"name":"IHX",
+												"type":"Sourcelevel1",
 												"id":15,
 												"status":"red"
 											}
@@ -34,6 +42,7 @@
 							},
 							{
 								"name":"ihs_mnemonic_curation",
+								"type":"Technicallevel3",
 								"id":38
 
 							}
@@ -41,35 +50,41 @@
 					},
 					{ 
 						"name": "Digititzed BOM" ,
+						"type":"Technicallevel2",
 						"id":3
 					}
 				]
 			},
 			{ 
 				"name": "mstrdata_rdl.e2esc_contingent_lbr_vw",
+				"type":"Technicallevel1",
 				"id":4,
 				"children": [
 				{ 
 					"name": "mstrdata_cdl.contingent_lbr_dtl" ,
-					
+					"type":"Technicallevel2",
 					"id": 5
 				},
 				{ 
 					"name": "Digititzed BOM" ,
+					"type":"Technicallevel2",
 					"id":6
 				}
 				]
 			},
 			{
 				"name":"mstrdata_rdl.e2esc_exch_rt_vw",
+				"type":"Technicallevel1",
 				"id":7,
 				"children": [
 				{
 					"name": "mstrdata_hub.crncy_exch_rt" ,
+					"type":"Technicallevel2",
 					"id":8
 				},
 				{ 
 					"name": "Digititzed BOM" ,
+					"type":"Technicallevel2",
 					"id":9
 
 				}
@@ -77,30 +92,36 @@
 			},
 			{
 				"name":"mstrdata_rdl.e2esc_comdty_vw",
+				"type":"Technicallevel1",
 				"id":10,
 				"status":"red",
 				"children": [
 				{ 
 					"name": "mstrdata_cdl.comdty_mstr",
+					"type":"Technicallevel2",
 					"status":"red",
 					"id":11,
 					"children":[
 						{
 							"name":"mstrdata_lz.w_resource_d",
+							"type":"Technicallevel3",
 							"id":12
 						},
 						{
 							"name":"mstrdata_lz.direct_comdty_mapping",
+							"type":"Technicallevel3",
 							"id":13,
 							"status":"red",
 							"children":[
 								{
 									"name":"Streamsets",
+									"type":"Platformlevel1",
 									"id":14,
 							
 									"children":[
 										{
 											"name":"IHX",
+											"type":"Sourcelevel1",
 											"id":15,
 											"status":"red"
 										}
@@ -110,6 +131,7 @@
 						},
 						{
 							"name":"mstrdata_lz.gcm_mapping",
+							"type":"Technicallevel3",
 							"id":16
 						}
 
@@ -117,37 +139,44 @@
 				},
 				{ 
 					"name": "Digititzed BOM" ,
+					"type":"Technicallevel2",
 					"id":17
 				}
 				]
 			},
 			{
 				"name":"mstrdata_rdl.e2esc_geo_vw",
+				"type":"Technicallevel1",
 				"id":18,
 				"status":"red",
 				"children": [
 				{ 
 					"name": "mstrdata_cdl.ref_val_hier_instances" ,
+					"type":"Technicallevel2",
 					"id":19
 				},
 				{ 
 					"name": "mstrdata_cdl.ref_values",
+					"type":"Technicallevel2",
 					"id":20
 				},
 				{ 
 					"name": "mstrdata_cdl.ref_val_sets_attr" ,
+					"type":"Technicallevel2",
 					"id":21,
 					"status":"red"
 				},
 				
 				{
 					"name": "mstrdata_cdl.ref_attr_values" ,
+					"type":"Technicallevel2",
 					"id":22
 				}
 				]
 			},
 			{
 				"name":"mstrdata_rdl.e2esc_workday_vw",
+				"type":"Technicallevel1",
 				"id":23
 			},
 			{
@@ -157,55 +186,73 @@
 				"children":[
 					{
 						"name":"mstrdata_cdl.itm_resource_role_relshp",
+						"type":"Technicallevel2",
 						"id":25
 					},
 					{
 						"name":"mstrdata_cdl.resource_role_mstr",
+						"type":"Technicallevel2",
 						"id":26
 					},
 					{
 						"name":"mstrdata_cdl.itm_mstr",
+						"type":"Technicallevel2",
 						"id":27
 					},
 					{
 						"name":"mstrdata_cdl.comdty_mstr",
+						"type":"Technicallevel2",
+
 						"id":28
 					}
 				]
 			},
 			{
 				"name":"mstrdata_rdl.e2esc_sc_stfg_frm_vw",
+				"type":"Technicallevel1",
 				"id":29
 			},
 			{
 				"name":"mstrdata_rdl.e2esc_call_cntr_parm_vw",
+				"type":"Technicallevel1",
 				"id":30
 			},
 			{
 				"name":"mstrdata_rdl.e2esc_call_cntr_overhead_vw",
+				"type":"Technicallevel1",
 				"id":31
 			},
 			{
 				"name":"MSTRDATA_RDL.E2ESC_CLEANSHEET_DRIVER_FACT",
+				"type":"Technicallevel1",
 				"id":32
 			},
 			{
 				"name":"HR_RDL.E2ESC_CNTRCTR_AVG_PAY_RT_HIST",
+				"type":"Technicallevel1",
 				"id":33
 			},
 			{
 				"name":"mstrdata_rdl.e2esc_cost_driver_filter_vw",
+				"type":"Technicallevel1",
 				"id":34
 			}
 			]
 		},
 		{
 			"name":"Cost Simulation",
+			"type":"businesslevel1",
 			"id":35	
 		},
 		{
 			"name":"Digitized BOM",
+			"type":"businesslevel1",
 			"id":36
-		}	
+		},
+		{
+			"name":"Cost Drivers",
+			"type":"businesslevel1",
+			"id":40
+		}		
 	]
 }
