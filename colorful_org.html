@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Business Process Lineage</title>    
+    <script src="https://d3js.org/d3.v5.min.js"></script> 
+
+    <style>
+         line
+        {
+            fill:green;
+            stroke:blue;
+            stroke-width:2px
+        }
+        p
+        {
+            background: black;
+            color:white;
+            font-size:30px;
+            width:100px;
+            margin:20px;
+            padding:10px;
+        }
+        .person
+        {
+            background: rgb(16, 0, 27);
+            color:rgb(201, 253, 253);
+            font-size:30px;
+            width:130px;
+            margin:15px;
+            padding:10px;
+        }
+	  path {
+         fill: None;
+         stroke: rgba(4, 36, 3, 0.87);
+         stroke-width:5;
+        
+      }
+    </style>
+    <!-- <script>
+        var canvas_width = "800"
+        var canvas_height = 1200
+        function get_canvas_width(){
+            return canvas_width;
+        }
+    </script> -->
+</head>
+<body>   
+
+<svg width={{canvas_width}} height={{canvas_height}} style="background:#fff">
+<g>
+
+<line x1="0" y1="100" x2="800" y2="100"></line>
+
+<line x1="0" y1="300" x2="800" y2="300"></line>
+</g>
+</svg>
+
+    <script>
+
+        
+        var subbusiness = {
+            "business":{x:400,y:10,t:'MSE',statuscolor:'#FF0000'},
+			"subbusiness1":{x:100,y:150,t:'Cost Simulation',statuscolor:'#0053a0'},
+			"subbusiness2":{x:350,y:150,t:'Digitized E2E Should Cost',statuscolor:'#FF0000'},
+			"subbusiness3":{x:600,y:150,t:'Digitized BOM',statuscolor:'#0053a0'},
+			"subbusiness4":{x:850,y:150,t:'Cost Drivers',statuscolor:'#0053a0'},
+			"table1":{x:100,y:400,t:'e2esc_itm_cost_driver_vw',statuscolor:'#0053a0'},
+			"table2":{x:350,y:400,t:'e2esc_contingent_lbr_vw',statuscolor:'#FF0000'},
+			"table3":{x:600,y:400,t:'e2esc_exch_rt_vw',statuscolor:'#FF0000'},
+			"table4":{x:850,y:400,t:'e2esc_comdty_vw',statuscolor:'#0053a0'},
+            "table5":{x:1100,y:400,t:'e2esc_geo_vw',statuscolor:'#0053a0'},
+            "table6":{x:1350,y:400,t:'e2esc_workday_vw',statuscolor:'#0053a0'},
+            "table7":{x:1600,y:400,t:'e2esc_sc_stfg_frm_vw',statuscolor:'#0053a0'},
+            "table8":{x:1850,y:400,t:'e2esc_call_cntr_parm_vw',statuscolor:'#0053a0'},
+            "table9":{x:2100,y:400,t:'e2esc_call_cntr_overhead_vw',statuscolor:'#0053a0'},
+            "table10":{x:2350,y:400,t:'e2esc_cleansheet_driver_fact',statuscolor:'#0053a0'},
+            "table11":{x:2600,y:400,t:'e2esc_cntrctr_avg_pay_rt_hist',statuscolor:'#0053a0'},
+            "table12":{x:2850,y:400,t:'e2esc_cost_driver_filter_vw',statuscolor:'#0053a0'},
+            "cdl1":{x:100,y:550,t:'cost_driver',statuscolor:'#0053a0'},
+			"cdl2":{x:350,y:550,t:'contingent_lbr_dtl',statuscolor:'#FF0000'},
+			"cdl3":{x:600,y:550,t:'comdty_mstr',statuscolor:'#FF0000'},
+			"cdl4":{x:850,y:550,t:'ref_val_hier_instances',statuscolor:'#0053a0'},
+            "cdl5":{x:1100,y:550,t:'ref_values',statuscolor:'#0053a0'},
+            "cdl6":{x:1350,y:550,t:'ref_val_sets_attr',statuscolor:'#0053a0'},
+            "cdl7":{x:1600,y:550,t:'ref_attr_values',statuscolor:'#0053a0'},
+            "cdl8":{x:1850,y:550,t:' itm_resource_role_relshp',statuscolor:'#0053a0'},
+            "cdl9":{x:2100,y:550,t:'resource_role_mstr',statuscolor:'#0053a0'},
+            "cdl10":{x:2350,y:550,t:'itm_mstr',statuscolor:'#0053a0'},
+            "cdl11":{x:2600,y:550,t:'comdty_mstr',statuscolor:'#0053a0'},
+
+            "lz1":{x:100,y:700,t:'driver_category',statuscolor:'#0053a0'},
+			"lz2":{x:350,y:700,t:'ihs_mnemonic_curation',statuscolor:'#FF0000'},
+			"lz3":{x:600,y:700,t:'jobcodes_curation',statuscolor:'#FF0000'},
+			"lz4":{x:850,y:700,t:'driver_category',statuscolor:'#0053a0'},
+            "lz5":{x:1100,y:700,t:'currency_curation ',statuscolor:'#0053a0'},
+            "lz6":{x:1350,y:700,t:'driver_category',statuscolor:'#0053a0'},
+            "lz7":{x:1600,y:700,t:'gcm_mapping',statuscolor:'#0053a0'},
+            "lz8":{x:1850,y:700,t:'direct_comdty_mapping',statuscolor:'#0053a0'},
+            "lz9":{x:2100,y:700,t:'hr_public_view',statuscolor:'#0053a0'},
+            "lz10":{x:2350,y:700,t:'hr_non_emp_active_view',statuscolor:'#0053a0'},
+            "lz11":{x:2600,y:700,t:'currency_curation',statuscolor:'#0053a0'},
+            "lz12":{x:2850,y:700,t:'drm_dsc_phy_geo_rptg',statuscolor:'#0053a0'},
+            "lz13":{x:3100,y:700,t:'w_resource_d',statuscolor:'#0053a0'},
+            "lz14":{x:3350,y:700,t:'direct_comdty_mapping',statuscolor:'#0053a0'},
+            "lz15":{x:3600,y:700,t:'gcm_mapping',statuscolor:'#0053a0'},
+            "lz16":{x:3850,y:700,t:'bloomberg_margin',statuscolor:'#0053a0'},
+            "lz17":{x:4100,y:700,t:'bloomberg_overheads',statuscolor:'#0053a0'},
+            "lz18":{x:4350,y:700,t:'driver_category',statuscolor:'#0053a0'},
+ 
+
+
+
+            "platform1":{x:100,y:950,t:'Streamsets',statuscolor:'#FF0000'},
+            "platform2":{x:350,y:950,t:'Informatica',statuscolor:'#0053a0'},
+			"platform3":{x:600,y:950,t:'Teradata',statuscolor:'#0053a0'},
+            "platform4":{x:850,y:950,t:'Greenplum',statuscolor:'#0053a0'},
+
+            
+            "source1":{x:100,y:1200,t:'IHS',statuscolor:'#FF0000'},
+            "source2":{x:350,y:1200,t:'TDX',statuscolor:'#0053a0'},
+			"source3":{x:600,y:1200,t:'Bloomberg',statuscolor:'#0053a0'},
+            "source4":{x:850,y:1200,t:'Call center',statuscolor:'#0053a0'},
+            "source5":{x:1100,y:1200,t:'Clean Sheet',statuscolor:'#FF0000'},
+            "source6":{x:1350,y:1200,t:'GCMs',statuscolor:'#0053a0'},
+			"source7":{x:1600,y:1200,t:'non_emp_active_view',statuscolor:'#0053a0'},
+            "source8":{x:1850,y:1200,t:'DDL',statuscolor:'#0053a0'},
+
+           
+
+
+
+
+		};
+
+	var links = [
+                {'from': 'business', 'to':'subbusiness1'},
+                {'from': 'business', 'to':'subbusiness2'},
+                {'from': 'business', 'to':'subbusiness3'},
+                {'from': 'business', 'to':'subbusiness4'},
+                {'from': 'subbusiness2', 'to':'table1'},
+                {'from': 'subbusiness2', 'to':'table2'}, 
+                {'from': 'subbusiness2', 'to':'table3'}, 
+                {'from': 'subbusiness2', 'to':'table4'},
+                {'from': 'subbusiness2', 'to':'table5'}, 
+                {'from': 'subbusiness2', 'to':'table6'}, 
+                {'from': 'subbusiness2', 'to':'table7'},
+                {'from': 'subbusiness2', 'to':'table8'}, 
+                {'from': 'subbusiness2', 'to':'table9'}, 
+                {'from': 'subbusiness2', 'to':'table10'},
+                {'from': 'subbusiness2', 'to':'table11'}, 
+                {'from': 'subbusiness2', 'to':'table12'}, 
+                {'from': 'table1', 'to':'cdl1'}, 
+                {'from': 'table2', 'to':'cdl2'},
+                {'from': 'table4', 'to':'cdl3'}, 
+                {'from': 'table5', 'to':'cdl4'},
+                {'from': 'table5', 'to':'cdl5'},
+                {'from': 'table5', 'to':'cdl6'},
+                {'from': 'table5', 'to':'cdl7'},
+                {'from': 'table7', 'to':'cdl8'},
+                {'from': 'table7', 'to':'cdl9'},
+                {'from': 'table7', 'to':'cdl10'},
+                {'from': 'table7', 'to':'cdl11'},
+                {'from': 'cdl1', 'to':'lz1'},
+                {'from': 'cdl1', 'to':'lz2'},
+                {'from': 'cdl2', 'to':'lz3'},
+                {'from': 'cdl3', 'to':'lz4'},
+                {'from': 'cdl4', 'to':'lz5'},
+                {'from': 'cdl4', 'to':'lz6'},
+                {'from': 'cdl5', 'to':'lz6'},
+                {'from': 'cdl6', 'to':'lz7'},
+                {'from': 'cdl6', 'to':'lz7'},
+                {'from': 'cdl7', 'to':'lz8'},
+                {'from': 'cdl8', 'to':'lz9'},
+                {'from': 'cdl8', 'to':'lz10'},
+
+                {'from': 'lz1', 'to':'platform1'},
+                {'from': 'lz2', 'to':'platform1'},
+                {'from': 'lz3', 'to':'platform3'},
+                {'from': 'lz3', 'to':'platform4'},
+                {'from': 'lz4', 'to':'platform2'},
+                {'from': 'lz5', 'to':'platform4'},
+                {'from': 'lz6', 'to':'platform1'},
+                {'from': 'lz7', 'to':'platform3'},
+                {'from': 'lz8', 'to':'platform4'},
+                {'from': 'lz9', 'to':'platform2'},
+
+                {'from': 'platform1', 'to':'source3'},
+                {'from': 'platform3', 'to':'source8'},
+                {'from': 'platform3', 'to':'source1'},
+                {'from': 'platform1', 'to':'source7'},
+                {'from': 'platform2', 'to':'source2'},
+                {'from': 'platform3', 'to':'source5'},
+                {'from': 'platform4', 'to':'source6'},
+                {'from': 'platform1', 'to':'source7'},
+                {'from': 'platform4', 'to':'source3'}
+                ]
+               
+
+
+
+	var svg = d3.select("svg")
+
+    
+
+    svg.selectAll('g_paths').data(links)
+	.enter().append("g")
+	.append("path")
+	.attr("d", function(d){ return create_path_d(d) });
+    
+	var business_array = svg.selectAll("g_bus").data(Object.values(subbusiness));
+        var g_bus_arr =business_array.enter().append("g");
+	
+        g_bus_arr.append("rect")
+        .attr("width", function(d){return 220;})
+         .attr("height", function(d){return 50;})
+        .attr("x", function(d,i){ return d.x;})
+        .attr("y", function(d,i){return d.y;})
+        .style("fill", function(d,i){return d.statuscolor;})
+        .style("stroke", "#674ea7")
+        .style("stroke-width",5);
+
+  
+	
+	g_bus_arr.append("text").text(function(d,i){return d.t;})
+            .attr("x", function(d,i){return d.x+5;})
+            .attr("y",function(d,i){return d.y+30;} )
+            .style("font-weight", "bold")
+            .style('fill', 'white');
+
+	
+	
+	function create_path_d(link){
+       
+	
+	from_id=link.from;
+	
+	to_id=link.to;
+		
+	from_x=subbusiness[from_id].x+70;
+	from_y=subbusiness[from_id].y+25;
+
+	to_x=subbusiness[to_id].x+70;
+	to_y=subbusiness[to_id].y+25;
+
+    return "M "+ from_x + " " + from_y + " C " + from_x + "," + (from_y + to_y)/2 + "," + to_x
+    + "," + (from_y + to_y)/2 + "," + to_x + "," + to_y;
+			
+	//  var data = [[from_x+30, from_y+30], [to_x+30, to_y+30]];
+    //      var lineGenerator = d3.line();
+    //      var pathString = lineGenerator(data);
+	// 	return pathString;
+	}
+
+	
+	
+
+
+    </script>
+</body>
+</html>
