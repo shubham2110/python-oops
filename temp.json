@@ -1,0 +1,211 @@
+{
+ "name": "MSE",
+ "children": [  
+	{
+			"name": "MA1 – Digitized E2E should cost",
+			"status":"red",
+			"id":0,
+			"children": [
+			{ 
+				"name": "mstrdata_rdl.e2esc_itm_cost_driver_vw",
+				"id":1,
+				"children": [
+					{ 
+						"name": "mstrdata_cdl.cost_driver",
+						"id":2 ,
+						"children":[
+							{
+								"name":"driver_category",
+								"id":37	,
+								"children":[
+									{
+										"name":"Streamsets",
+										"id":14,
+								
+										"children":[
+											{
+												"name":"IHX",
+												"id":15,
+												"status":"red"
+											}
+										]
+									}
+								]
+							},
+							{
+								"name":"ihs_mnemonic_curation",
+								"id":38
+
+							}
+						]
+					},
+					{ 
+						"name": "Digititzed BOM" ,
+						"id":3
+					}
+				]
+			},
+			{ 
+				"name": "mstrdata_rdl.e2esc_contingent_lbr_vw",
+				"id":4,
+				"children": [
+				{ 
+					"name": "mstrdata_cdl.contingent_lbr_dtl" ,
+					
+					"id": 5
+				},
+				{ 
+					"name": "Digititzed BOM" ,
+					"id":6
+				}
+				]
+			},
+			{
+				"name":"mstrdata_rdl.e2esc_exch_rt_vw",
+				"id":7,
+				"children": [
+				{
+					"name": "mstrdata_hub.crncy_exch_rt" ,
+					"id":8
+				},
+				{ 
+					"name": "Digititzed BOM" ,
+					"id":9
+
+				}
+				]
+			},
+			{
+				"name":"mstrdata_rdl.e2esc_comdty_vw",
+				"id":10,
+				"status":"red",
+				"children": [
+				{ 
+					"name": "mstrdata_cdl.comdty_mstr",
+					"status":"red",
+					"id":11,
+					"children":[
+						{
+							"name":"mstrdata_lz.w_resource_d",
+							"id":12
+						},
+						{
+							"name":"mstrdata_lz.direct_comdty_mapping",
+							"id":13,
+							"status":"red",
+							"children":[
+								{
+									"name":"Streamsets",
+									"id":14,
+							
+									"children":[
+										{
+											"name":"IHX",
+											"id":15,
+											"status":"red"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name":"mstrdata_lz.gcm_mapping",
+							"id":16
+						}
+
+					] 
+				},
+				{ 
+					"name": "Digititzed BOM" ,
+					"id":17
+				}
+				]
+			},
+			{
+				"name":"mstrdata_rdl.e2esc_geo_vw",
+				"id":18,
+				"status":"red",
+				"children": [
+				{ 
+					"name": "mstrdata_cdl.ref_val_hier_instances" ,
+					"id":19
+				},
+				{ 
+					"name": "mstrdata_cdl.ref_values",
+					"id":20
+				},
+				{ 
+					"name": "mstrdata_cdl.ref_val_sets_attr" ,
+					"id":21,
+					"status":"red"
+				},
+				
+				{
+					"name": "mstrdata_cdl.ref_attr_values" ,
+					"id":22
+				}
+				]
+			},
+			{
+				"name":"mstrdata_rdl.e2esc_workday_vw",
+				"id":23
+			},
+			{
+				
+				"name":"vw",
+				"id":24,
+				"children":[
+					{
+						"name":"mstrdata_cdl.itm_resource_role_relshp",
+						"id":25
+					},
+					{
+						"name":"mstrdata_cdl.resource_role_mstr",
+						"id":26
+					},
+					{
+						"name":"mstrdata_cdl.itm_mstr",
+						"id":27
+					},
+					{
+						"name":"mstrdata_cdl.comdty_mstr",
+						"id":28
+					}
+				]
+			},
+			{
+				"name":"mstrdata_rdl.e2esc_sc_stfg_frm_vw",
+				"id":29
+			},
+			{
+				"name":"mstrdata_rdl.e2esc_call_cntr_parm_vw",
+				"id":30
+			},
+			{
+				"name":"mstrdata_rdl.e2esc_call_cntr_overhead_vw",
+				"id":31
+			},
+			{
+				"name":"MSTRDATA_RDL.E2ESC_CLEANSHEET_DRIVER_FACT",
+				"id":32
+			},
+			{
+				"name":"HR_RDL.E2ESC_CNTRCTR_AVG_PAY_RT_HIST",
+				"id":33
+			},
+			{
+				"name":"mstrdata_rdl.e2esc_cost_driver_filter_vw",
+				"id":34
+			}
+			]
+		},
+		{
+			"name":"Cost Simulation",
+			"id":35	
+		},
+		{
+			"name":"Digitized BOM",
+			"id":36
+		}	
+	]
+}
